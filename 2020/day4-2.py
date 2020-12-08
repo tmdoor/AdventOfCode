@@ -24,7 +24,7 @@ for passDict in passDictList:
 
 extraValidPassports = 0
 #verify validity of eligible passports
-eyeList = ["amb","blue","brn","gry","grn","hzl","oth"]
+eyeList = ["amb","blu","brn","gry","grn","hzl","oth"]
 for passDict in validPassports:
     invalidPass = 0
     
@@ -33,16 +33,17 @@ for passDict in validPassports:
     iyrLen = len(passDict["iyr"])
     eyrLen = len(passDict["eyr"])
     pidLen = len(passDict["pid"])
-    lenProd = byrLen*iyrLen*eyrLen*pidLen
-    if lenProd != 576:
+    hclLen = len(passDict["hcl"])
+    lenProd = byrLen*iyrLen*eyrLen*pidLen*(hclLen)
+    if lenProd != 4032:
         invalidPass = 1
     
     #check that values above are in valid ranges
-    if int(passDict["byr"]) not in  range(1920,2002):
+    if int(passDict["byr"]) not in range(1920,2002):
         invalidPass = 1
-    if int(passDict["iyr"]) not in  range(2010,2020):
+    if int(passDict["iyr"]) not in range(2010,2020):
         invalidPass = 1
-    if int(passDict["eyr"]) not in  range(2020,2030):
+    if int(passDict["eyr"]) not in range(2020,2030):
         invalidPass = 1
     
     #check that height is right format and value
@@ -56,13 +57,12 @@ for passDict in validPassports:
         invalidPass = 1
 
     #check if hair color is valid hex by trying to convert to int
-    if len(passDict["hcl"]) != 7:
-        invalidPass = 1
     if passDict["hcl"][0] == "#":
         try:
-            testInt = int(passDict["hcl"][1:])
+            testInt = int(passDict["hcl"][1:], 16)
         except:
             invalidPass = 1
+            print(passDict["hcl"])
     else:
         invalidPass = 1
 
@@ -72,12 +72,9 @@ for passDict in validPassports:
     
     if invalidPass == 0:
         extraValidPassports = extraValidPassports+1
-        print(passDict)
-
-
-
-
-
-
-
+        print(passDict["hcl"])
+        #print("VALID")
+    #else:
+        #print(passDict)
+        #print("INVALID")
 print(str(extraValidPassports)+" passports are valid")
