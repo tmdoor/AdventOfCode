@@ -62,7 +62,7 @@ for passDict in validPassports:
             testInt = int(passDict["hcl"][1:], 16)
         except:
             invalidPass = 1
-            print(passDict["hcl"])
+            #print(passDict["hcl"])
     else:
         invalidPass = 1
 
@@ -72,7 +72,7 @@ for passDict in validPassports:
     
     if invalidPass == 0:
         extraValidPassports = extraValidPassports+1
-        print(passDict["hcl"])
+        #print(passDict["hcl"])
         #print("VALID")
     #else:
         #print(passDict)
