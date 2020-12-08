@@ -1,5 +1,5 @@
 #open file, replace newline with spaces, split into list on double space (empty lines in file)
-passList = open("day4input").read().replace("\n"," ").split("  ")
+passList = open("input-d4.txt").read().replace("\n"," ").split("  ")
 
 
 #construct the list of passport dicts
@@ -74,9 +74,5 @@ for passDict in validPassports:
     
     if invalidPass == 0:
         extraValidPassports = extraValidPassports+1
-        #print(passDict["hcl"])
-        #print("VALID")
-    #else:
-        #print(passDict)
-        #print("INVALID")
+
 print(str(extraValidPassports)+" passports are valid")
