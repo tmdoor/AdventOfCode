@@ -26,32 +26,34 @@ extraValidPassports = 0
 #verify validity of eligible passports
 eyeList = ["amb","blu","brn","gry","grn","hzl","oth"]
 for passDict in validPassports:
-    invalidPass = 0
     
+    #print(passDict)
+
+    invalidPass = 0
     #check that applicable value lengths are correct number of digits
     byrLen = len(passDict["byr"])
     iyrLen = len(passDict["iyr"])
     eyrLen = len(passDict["eyr"])
     pidLen = len(passDict["pid"])
     hclLen = len(passDict["hcl"])
-    lenProd = byrLen*iyrLen*eyrLen*pidLen*(hclLen)
+    lenProd = byrLen*iyrLen*eyrLen*pidLen*hclLen
     if lenProd != 4032:
         invalidPass = 1
     
     #check that values above are in valid ranges
-    if int(passDict["byr"]) not in range(1920,2002):
+    if int(passDict["byr"]) not in range(1920,2003):
         invalidPass = 1
-    if int(passDict["iyr"]) not in range(2010,2020):
+    if int(passDict["iyr"]) not in range(2010,2021):
         invalidPass = 1
-    if int(passDict["eyr"]) not in range(2020,2030):
+    if int(passDict["eyr"]) not in range(2020,2031):
         invalidPass = 1
     
     #check that height is right format and value
     if passDict["hgt"][-2:] == "cm":
-        if int(passDict["hgt"][:-2]) not in range(150,193):
+        if int(passDict["hgt"][:-2]) not in range(150,194):
             invalidPass = 1
     elif passDict["hgt"][-2:] == "in":
-        if int(passDict["hgt"][:-2]) not in range(59,76):
+        if int(passDict["hgt"][:-2]) not in range(59,77):
             invalidPass = 1
     else:
         invalidPass = 1
